@@ -1,2 +1,2 @@
 cs5008 with Prof. Lee
-yakauleva.a@northeastern.edu
+student Anastasia yakauleva.a@northeastern.edu
