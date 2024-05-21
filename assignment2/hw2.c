@@ -1,34 +1,56 @@
-// name: <your name here>
-// email: <your email here>
+// name: Anastasia Yakauleva
+// email: yakauleva.a@northeastern.edu
 
 #include <stdio.h>   // stardard input/output library
-#include <stdbool.h> // standard boolean library: bool, true, false
+#include <stdbool.h> // standard boolean library: bool, true,
 
 #define MAXSIZE 100
 
-bool isEmpty (int* s, int t) {
-  // returns true if t = -1
+bool isEmpty (int top) {
+  // returns true if top = -1
 
-  // INSERT YOUR CODE HERE
+  if (top == -1){
+    return true;
+  } else {
+    return false;
+  }
 }
 
-bool isFull (int* s, int t) {
+bool isFull (int top) {
   // returns true if no more room in the stack
 
-  // INSERT YOUR CODE HERE
+  if (top >= MAXSIZE - 1){
+    return true;
+  } else {
+    return false;
+    }
+
 }
 
-void push(int v, int* s, int* tp) {
+void push(int v, int* pStack, int* pTop) {
   // put v onto the top of the stack s unless it is already full
 
-  // INSERT YOUR CODE HERE
+  if (!isFull(*pTop)) {
+    (*pTop)++;
+    pStack[*pTop] = v;
+  } else {
+    printf("*** Attempt to push full stack***\n");
+  }
+  return;
 }
 
-int pop (int* s, int* tp) {
+int pop (int* pStack, int* pTop) {
   // return the top entry in the stack unless stack is empty
-  // update s and *tp -- requires top to be passed by reference!
+  // update s and *top -- requires top to be passed by reference!
+  int returnval = 0;
 
-  // INSERT YOUR CODE HERE
+  if (!isEmpty(*pTop)) {
+    returnval = pStack[*pTop];
+    (*pTop)--;  // Decrement top to update it
+  } else {
+    printf("***Attempt to pop empty stack***\n");
+  }
+  return returnval;
 }
 
 int main () {
