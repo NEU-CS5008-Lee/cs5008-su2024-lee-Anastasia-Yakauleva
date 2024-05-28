@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Anastasia Yakauleva
+// email: yakauleva.a@northeastern.edu
 
 #include <stdio.h>   // stardard input/output library
 #include <stdbool.h> // standard boolean library: bool, true, false
@@ -8,7 +8,7 @@
                      // https://www.tutorialspoint.com/c_standard_library/
 
 #define MAXMAGNITUDE 100   // the biggest number to be inserted in the queue
-#define HOWMANY 10           // how many numbers to be inserted in the queue
+#define HOWMANY 10         // how many numbers to be inserted in the queue
 
 
 /*
@@ -70,8 +70,9 @@ typedef struct q {
 // create new empty queue (head and tail are set to NULL)
 queue_t* newQueue() {
   queue_t* q_p;   // temp pointer to hold newly created queue
-
-  // ***** INSERT YOUR CODE HERE *****
+  q_p = (queue_t*)malloc(sizeof(queue_t));
+  q_p->head_p = NULL;
+  q_p->tail_p = NULL;
   
   return q_p;
 };
@@ -80,7 +81,9 @@ queue_t* newQueue() {
 bool isEmpty(queue_t* q_p) {
   bool b = true;   // temporary bool to hold return value - initalize to default value
 
-  // ***** INSERT YOUR CODE HERE *****
+  if (q_p->head_p != NULL){
+    b = false;  // if the head pointer has something but NULL, the queue is not empty
+  }
   
   return b;
 };
@@ -88,18 +91,21 @@ bool isEmpty(queue_t* q_p) {
 // function to add a new node with data d to tail of the queue
 void enqueue(queue_t* q_p, int d) {
   node_t* n_p = NULL; // temp node pointer
-  
+  n_p = newNode(d);   // create a new node n_p with the given data d
   if (q_p != NULL) {
 
     if (isEmpty(q_p)) {
       // queue is empty so insertion is easy
-
-      // ***** INSERT YOUR CODE HERE *****
+      // set head and tail pointers to the new node
+      q_p->head_p = n_p;
+      q_p->tail_p = n_p;
 
     } else {
       // queue is not empty
 
-      // ***** INSERT YOUR CODE HERE *****
+      q_p->tail_p->right_p = n_p;  // sets the right pointer of the current tail node to point to the new node
+      n_p->left_p = q_p->tail_p;   // sets the left pointer of the new node to point back to the current tail node
+      q_p->tail_p = n_p;           // the new node becomes the tail of the queue
 
     }    
   }
@@ -121,12 +127,14 @@ int dequeue(queue_t* q_p) {
 	if (q_p->head_p  == q_p->tail_p) {      
           // only one node in the queue, clear queue head and tail 
 
-          // ***** INSERT YOUR CODE HERE *****
+	  q_p->head_p = NULL;
+	  q_p->tail_p = NULL;
 	  
 	} else {
-          // mulitple nodes in queue, clean up head pointer and new head of queue
+	  // mulitple nodes in queue, clean up head pointer and new head of queue
 
-	  // ***** INSERT YOUR CODE HERE *****
+	  q_p->head_p = n_p->right_p;  // move head pointer to the next node
+	  q_p->head_p->left_p = NULL;  // set left pointer of new head to NULL
 	  
 	}
 	
@@ -169,7 +177,7 @@ int main () {
   queue_t* q2_p = newQueue();
   
 
-  // get random number seed
+  // get random number seed based on time
   srand((unsigned)time(NULL));
   
   for (i=0; i<HOWMANY; i++)  {
