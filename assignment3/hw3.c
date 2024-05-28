@@ -73,7 +73,7 @@ queue_t* newQueue() {
   q_p = (queue_t*)malloc(sizeof(queue_t));
   q_p->head_p = NULL;
   q_p->tail_p = NULL;
-  
+
   return q_p;
 };
 
