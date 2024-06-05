@@ -27,6 +27,7 @@ int main()
 	}
 	fclose(fp);
 
+	// Insertion sort
 	for (i = 1; i < count; i++){
 		temp = arr[i];
 		j = i - 1;
@@ -35,7 +36,6 @@ int main()
 			j--;
 		}
 		arr[j+1] = temp; // left becomes the smallest
-
 	}
 
     // Display the sorted array
