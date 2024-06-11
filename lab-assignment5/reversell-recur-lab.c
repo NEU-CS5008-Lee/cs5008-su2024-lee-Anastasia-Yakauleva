@@ -1,4 +1,6 @@
-//enter your name and email here
+//Anastasia
+//yakauleva.a@northeastern.edu
+
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct node
