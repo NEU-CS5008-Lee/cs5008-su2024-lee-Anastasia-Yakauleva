@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+//Anastasia
+//yakauleva.a@northeastern.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,17 +32,55 @@ int findMin(int a, int b){
 
 // merge two sorted sub arrays
 void mergeIt(
-	   char* data,
-	   int leftStart,
-	   int leftStop,
-	   int rightStart,
-	   int rightStop) {
-  
+	char* data, // The array containing the subarrays to be merged
+	int leftStart,
+	int leftStop,
+	int rightStart,
+	int rightStop) {
 
-  // ADD YOUR CODE HERE
-  
-  return;
+	int len = (leftStop - leftStart + 1) + (rightStop - rightStart + 1);
+	char* merged = (char*)malloc(len * sizeof(char));
+	int mergedInd = 0;
+	int originalLeftStart = leftStart;  // Save the original for copy part
+
+	// merge until one of the arrays is done
+	while (leftStart <= leftStop && rightStart <= rightStop) {
+		if (data[leftStart] < data[rightStart]) {
+			merged[mergedInd++] = data[leftStart++];
+		} else {
+			merged[mergedInd++] = data[rightStart++];
+		}
+	}
+	// if left array has remaining elements
+	while (leftStart <= leftStop) {
+		merged[mergedInd++] = data[leftStart++];
+	}
+
+	// if right array has remaining elements
+	while (rightStart <= rightStop) {
+		merged[mergedInd++] = data[rightStart++];
+	}
+
+	/*
+	Debug
+	printf("Merged array: ");
+	for (int i = 0; i < len; i++) {
+		printf("%c ", merged[i]);
+	}
+	printf("\n");
+
+	 */
+
+	// copy into original array
+	for (int i = 0; i < len; i++) {
+		data[originalLeftStart + i] = merged[i];
+	}
+
+	free(merged);
+
+	return;
 }
+
 
 
 

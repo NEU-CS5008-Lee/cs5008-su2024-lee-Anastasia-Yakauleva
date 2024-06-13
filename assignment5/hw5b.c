@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+//Anastasia
+//yakauleva.a@northeastern.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,21 +22,44 @@ char randChar() {
 // return the value of a char unless it is lower case
 // in which case return the upper case of the character
 char upperChar(char c){
-  if ((c<'a') || (c>'z')){
+  if ((c<'a') || (c>'z')){ //If c is not a lowercase letter
     return(c);
   } else {
     // if you forget the displacement of lower to upper case
     // just let the computer figure it out for you!
-    return(c-('a'-'A'));
+    return(c-('a'-'A'));  //c - (97 - 65)
   }
 }
 
+//Function to swap two characters
+void swap(char* a, char* b){
+  int temp = *a;
+  *a = *b;
+  *b = temp;
+}
 
 
 // pick pivot and then sort small and big parts 
 void quicky(char* data, int left, int right) {
 
-  // ADD YOUR CODE HERE
+  if(left<right){
+
+    int i = left - 1; //ind to track smaller el
+
+    for(int j = left; j<= right - 1; j++){
+      // If current element is smaller than or equal to pivot
+      if (upperChar(data[j]) <= upperChar(data[right])){
+        i++;
+        swap(&data[i], &data[j]);
+      }
+    }
+    // Swap the pivot element (most right) with the element at index i+1 to place the pivot in the correct position
+    swap(&data[i+1], &data[right]); // i is NOT incremented here
+    int pivot = i + 1; // Update the pivot index
+
+    quicky(data, left, pivot - 1);
+    quicky(data, pivot + 1, right);
+  }
 
   return;
 }
