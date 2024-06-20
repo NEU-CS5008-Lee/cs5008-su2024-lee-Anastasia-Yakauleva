@@ -1,5 +1,5 @@
-/*---enter your name here----*/
-/*---enter your email here-----*/
+// Anastasia
+// yakauleva.a@northeastern.edu
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -128,10 +128,19 @@ void freenode(node_t *p){
    a AVL tree using four cases*/
 node_t* Insert(node_t* root, int data)
 {
-    
-    
-    //insert your code here
+    //Insert a node like in BST
+    if (root == NULL)
+        return NewNode(data);
 
+    //smaller goes left
+    if (data < root->data)
+        root->left = Insert(root->left, data);
+
+    //bigger goes right
+    else if (data > root->data)
+        root->right = Insert(root->right, data);
+    else // Equal data is not allowed in BST!!
+        return root;
 
     /*updating the height after insertion of the node*/
     root->height = max(height(root->left),height(root->right))+1;
@@ -139,6 +148,7 @@ node_t* Insert(node_t* root, int data)
     /*checking the balance factor to check the tree is balanced */
     int balance = Balance(root);
 
+    // If this node becomes unbalanced:
     /* left- left case*/
     if(balance > 1 && data < root->left->data)
         return RightRotate(root);
