@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Anastasia
+// email: yakauleva.a@northeastern.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -242,28 +242,57 @@ void freeQueue(queue_t* qp) {
 // void postorder (tnode_t* np) {}
 // void breadthFirst (tnode_t* np) {}
 
-void preorder (tnode_t* np) {
-  // INSERT YOUR CODE HERE
-
+void preorder (tnode_t* np) {  //NLR
+  if(np != NULL){
+    printf("%c", np-> data);
+    preorder (np->left);
+    preorder (np->right);
+  }
   return;
 }
 
-void inorder (tnode_t* np) {
-  // INSERT YOUR CODE HERE
-  
+void inorder (tnode_t* np) { //LNR
+  if(np != NULL){
+    inorder (np->left);
+    printf("%c", np-> data);
+    inorder (np->right);
+  }
   return;
 }
 
-void postorder (tnode_t* np) {
-  // INSERT YOUR CODE HERE
-  
+void postorder (tnode_t* np) {  //LRN
+  if(np != NULL){
+    postorder (np->left);
+    postorder (np->right);
+    printf("%c", np-> data);
+  }
   return;
 }
 
 
 void breadthFirst (tnode_t* root) {
-  // INSERT YOUR CODE HERE
-  
+  if (root == NULL)
+    return;
+
+  // Make a temporary queue and enqueue the root
+  queue_t* tempQueue = newQueue();
+  enqueue(tempQueue, root);
+
+  while(!isEmpty(tempQueue)){ //as long as the tempQueue is not empty
+    // Dequeue a node from the front of the queue and print it
+    tnode_t* curr = dequeue(tempQueue);
+    printf("%c", curr->data);
+
+    // Enqueue the left child if any
+    if(curr->left != NULL)
+      enqueue(tempQueue, curr->left);
+
+    // Enqueue the right child if any
+    if(curr->right != NULL)
+      enqueue(tempQueue, curr->right);
+
+  }
+  freeQueue(tempQueue);
   return;
 }
 
