@@ -8,15 +8,22 @@
 /* function to encrypt the data*/
 void encrypt(char text[], int key)
 {
-    // Add your code here
+    for (int x=0; x < strlen(text); x++){
+        // Determine if char is uppercase or lowercase
+        char offset = isupper(text[x]) ? 'A' : 'a';
+        text[x] = (text[x] - offset + key) % 26 + offset;
+
+    }
 }
 
 /*function to decrypt the data*/
 void decrypt(char text[],int key)
 {
     
-    // Add your code here
-    
+    for (int x=0; x < strlen(text); x++){
+        char offset = isupper(text[x]) ? 'A' : 'a';
+        text[x] = (text[x] - offset - key +26) % 26 + offset;
+    }
 }
 
 
