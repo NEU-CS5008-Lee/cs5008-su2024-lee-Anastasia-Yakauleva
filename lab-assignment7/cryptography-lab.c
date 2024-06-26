@@ -1,5 +1,5 @@
-//enter your name here
-//enter your email here
+// name: Anastasia
+// email: yakauleva.a@northeastern.edu
 
 #include <stdio.h>
 #include <string.h>
