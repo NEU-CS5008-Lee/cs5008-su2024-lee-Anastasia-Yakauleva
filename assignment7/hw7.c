@@ -78,8 +78,8 @@ int main () {
 
       nextChar = 0;
       state = STARTSTATE; 
-      strcpy(temp,"");       // temp = ""
-      strcpy(cityStr,"");     // reset cityStr
+      strcpy(temp,"");       // temp = "", reset
+      strcpy(cityStr,"");
 
       if (nextChar >= strlen(inputLine)){
 	// if no input string then go to ERRORSTATE
@@ -104,7 +104,7 @@ int main () {
 				appendChar(temp, inputLine[nextChar]);
 			} else if (inputLine[nextChar] == ',') {
 				state = S2;
-				strcpy(temp,"");  // reset temp for city name
+				strcpy(temp,"");
 			} else {
 				state = ERRORSTATE;
 			}
@@ -137,7 +137,7 @@ int main () {
 		case S5:
 			if (inputLine[nextChar] == '"') {
 				state = S6;
-				strcpy(temp, ""); // reset temp for population
+				strcpy(temp, "");
 			} else if (inputLine[nextChar] == '(') {
 				state = ACCEPTSTATE;
 				popInt = 0; // missing population
@@ -150,10 +150,10 @@ int main () {
 			if (isDigit(inputLine[nextChar])) {
 				appendChar(temp, inputLine[nextChar]);
 			} else if (inputLine[nextChar] == ',') {
-				// Ignore commas within the population number
+				// Ignore commas
 			} else if (inputLine[nextChar] == '"') {
 				state = ACCEPTSTATE;
-				popInt = atoi(temp); // convert population to integer
+				popInt = atoi(temp);
 			} else {
 				state = ERRORSTATE;
 			}
