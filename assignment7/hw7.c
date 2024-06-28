@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Anastasia
+// email: yakauleva.a@northeastern.edu
 
 // format of document is a bunch of data lines beginning with an integer (rank which we ignore)
 // then a ',' followed by a double-quoted string (city name)
@@ -79,6 +79,7 @@ int main () {
       nextChar = 0;
       state = STARTSTATE; 
       strcpy(temp,"");       // temp = ""
+      strcpy(cityStr,"");     // reset cityStr
 
       if (nextChar >= strlen(inputLine)){
 	// if no input string then go to ERRORSTATE
@@ -98,7 +99,65 @@ int main () {
 	    break;
 
 
-	  // ADD YOUR CODE HERE
+		case S1:
+			if (isDigit(inputLine[nextChar])) {
+				appendChar(temp, inputLine[nextChar]);
+			} else if (inputLine[nextChar] == ',') {
+				state = S2;
+				strcpy(temp,"");  // reset temp for city name
+			} else {
+				state = ERRORSTATE;
+			}
+		break;
+
+		case S2:
+			if (inputLine[nextChar] == '"') {
+				state = S3;
+			} else {
+				state = ERRORSTATE;
+			}
+		break;
+
+		case S3:
+			if (inputLine[nextChar] != '"') {
+				appendChar(cityStr, inputLine[nextChar]);
+			} else {
+				state = S4;
+			}
+		break;
+
+		case S4:
+			if (inputLine[nextChar] == ',') {
+				state = S5;
+			} else {
+				state = ERRORSTATE;
+			}
+		break;
+
+		case S5:
+			if (inputLine[nextChar] == '"') {
+				state = S6;
+				strcpy(temp, ""); // reset temp for population
+			} else if (inputLine[nextChar] == '(') {
+				state = ACCEPTSTATE;
+				popInt = 0; // missing population
+			} else {
+				state = ERRORSTATE;
+			}
+		break;
+
+		case S6:
+			if (isDigit(inputLine[nextChar])) {
+				appendChar(temp, inputLine[nextChar]);
+			} else if (inputLine[nextChar] == ',') {
+				// Ignore commas within the population number
+			} else if (inputLine[nextChar] == '"') {
+				state = ACCEPTSTATE;
+				popInt = atoi(temp); // convert population to integer
+			} else {
+				state = ERRORSTATE;
+			}
+		break;
  
 	    
 	  case ACCEPTSTATE:
