@@ -1,6 +1,7 @@
 /* Lab Assignment for Hospital ER */
-//enter your name here
-//enter your email here
+// name: Anastasia
+// email: yakauleva.a@northeastern.edu
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -48,17 +49,41 @@ void heapify(pq*p2,int n, int i ){
 
     int lchild=2*i+1;/*left =2*i+1*/
     int rchild=2*i+2;/*right=2*i+2*/
-    /*insert your code here*/
+
+	// left child exists and is bigger than root
+	if (lchild < n && p2->heap[lchild].priority > p2->heap[largest].priority) {
+        largest = lchild;
+		}
+
+	// same for the right child
+	if (rchild < n && p2->heap[rchild].priority > p2->heap[largest].priority) {
+        largest = rchild;
+    }
+
+	/* Swap and keep heapifying if root is not bigger */
+    if (largest != i) {
+        swap(&p2->heap[i], &p2->heap[largest]);
+        heapify(p2, n, largest);
+    }
+
 
 }
 
 /* To shift the new node (inserted at the end) up at its appropriate position in order to satisfy the max heap property */ 
-void shiftUp(pq* p2,int i)
-{
-    /*insert your code here*/
-       
-    
+void shiftUp(pq* p2,int i){
+	// If the node is already at the root
+    if (i == 0) return;
+
+    int parent = (i - 1) / 2;
+
+	//keep moving until reach the root or parent is bigger
+    while (i > 0 && p2->heap[parent].priority < p2->heap[i].priority) {
+        swap(&p2->heap[parent], &p2->heap[i]);
+        i = parent;
+        parent = (i - 1) / 2;
+    }
 }
+
  
 /*function to insert patient info into the heap*/
 void insert(pq* p2)
