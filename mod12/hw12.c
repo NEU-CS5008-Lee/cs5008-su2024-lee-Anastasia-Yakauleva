@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Anastasia Yakauleva
+// email: yakauleva.a@northeastern.edu
 // Compile with:
 //
 // gcc -lpthread hw12.c -o hw12
